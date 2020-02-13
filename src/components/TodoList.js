@@ -12,7 +12,7 @@ export class TodoList extends React.Component {
   render() {
     const todoList = this.props.todoList.map((todo, i) => {
       return (
-        <GridListTile>
+        <GridListTile key={i}>
           <Todo
             key={i}
             text={todo.text}
