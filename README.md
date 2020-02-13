@@ -1,5 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Heroku
+
+https://task-planner-part.herokuapp.com/
+
+Credenciales de ingreso:
+
+- User: pepe@mail.com
+- Contraseña: 123
+
 ## Available Scripts
 
 In the project directory, you can run:
