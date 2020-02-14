@@ -17,7 +17,7 @@ export default App;
 import React, { Component } from "react";
 import "./App.css";
 import { Login } from "./components/Login";
-import Home from "./components/Drawer";
+import {Home} from "./components/Home";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 class App extends Component {

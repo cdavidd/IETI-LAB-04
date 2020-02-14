@@ -3,6 +3,7 @@
   flex-wrap: "wrap";
   justify-content: "space-around";
   overflow: "hidden";
+  margin-top: 3%;
 }
 
 .gridList {
