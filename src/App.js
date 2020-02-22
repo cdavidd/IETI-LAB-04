@@ -1,24 +1,9 @@
-/*import React from "react";
-import logo from "./logo.svg";
-import { Login } from "./components/Login";
-import Drawer from "./components/Drawer";
-import "./App.css";
-
-function App() {
-  return (
-    <div className="App">
-      <Drawer />
-    </div>
-  );
-}
-
-export default App;
-*/
 import React, { Component } from "react";
 import "./App.css";
 import { Login } from "./components/Login";
-import {Home} from "./components/Home";
+import { Home } from "./components/Home";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import NewTask from "./components/NewTask";
 
 class App extends Component {
   constructor(props) {
@@ -44,14 +29,17 @@ class App extends Component {
         }
       />
     );
-
+    const newTask = () => <NewTask />;
     return (
       <Router>
         <div className="App">
           <div>
-            {redi}
+            {
+              //redi
+            }
             <Route exact path="/" component={this.state.LoginView} />
             <Route path="/home" component={this.state.TodoAppView} />
+            <Route path="/new-task" component={newTask} />
           </div>
         </div>
       </Router>
