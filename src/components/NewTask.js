@@ -9,18 +9,20 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 import "date-fns";
-import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker
 } from "@material-ui/pickers";
+import Drawer from "./Drawer";
 
 const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120
+  },
+  form: {
+    marginTop: theme.spacing(10)
   }
 }));
 
@@ -34,7 +36,7 @@ export default function NewTask() {
       email: ""
     },
     status: "",
-    dueDate: new Date("2014-08-18T21:11:54")
+    dueDate: new Date("2020-08-18T21:11:54")
   });
 
   const handleDescripcion = event => {
@@ -61,9 +63,31 @@ export default function NewTask() {
     setOpen(true);
   };
 
+  const handleSumit = e => {
+    e.preventDefault();
+    if (
+      !state.descripcion.length ||
+      !state.responsable.name.length ||
+      !state.status.length
+    ) {
+      return;
+    }
+    if (localStorage.getItem("items") === null) {
+      //alert("no");
+      var items = [state];
+      localStorage.setItem("items", JSON.stringify(items));
+    } else {
+      let items = JSON.parse(localStorage.getItem("items"));
+      items.push(state);
+      localStorage.setItem("items", JSON.stringify(items));
+    }
+    document.location.href = "/home";
+  };
+
   return (
     <div>
-      <form>
+      <Drawer />
+      <form onSubmit={handleSumit} className={classes.form}>
         <h3>New Task</h3>
         <TextField
           id="text"
@@ -99,10 +123,10 @@ export default function NewTask() {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            <MenuItem value={10}>New</MenuItem>
-            <MenuItem value={20}>Ready</MenuItem>
-            <MenuItem value={30}>In progress</MenuItem>
-            <MenuItem value={40}>Done</MenuItem>
+            <MenuItem value="New">New</MenuItem>
+            <MenuItem value="Ready">Ready</MenuItem>
+            <MenuItem value="In progress">In progress</MenuItem>
+            <MenuItem value="Done">Done</MenuItem>
           </Select>
         </FormControl>
         <br />

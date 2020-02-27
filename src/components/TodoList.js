@@ -15,9 +15,10 @@ export class TodoList extends React.Component {
         <GridListTile key={i}>
           <Todo
             key={i}
-            text={todo.text}
-            priority={todo.priority}
+            descripcion={todo.descripcion}
+            name={todo.responsable.name}
             dueDate={todo.dueDate}
+            status={todo.status}
           />
         </GridListTile>
       );

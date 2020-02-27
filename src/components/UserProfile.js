@@ -5,18 +5,21 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import LockIcon from "@material-ui/icons/LockOutlined";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import "./Login.css";
+import Drawer from "./Drawer";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-export class Login extends React.Component {
+export class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "" };
+    this.state = { email: "", password: "", name: "", cpassword: "" };
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCpassword = this.handleCpassword.bind(this);
+    this.handleName = this.handleName.bind(this);
   }
 
   handlePassword(e) {
@@ -24,46 +27,65 @@ export class Login extends React.Component {
       password: e.target.value
     });
   }
+  handleCpassword(e) {
+    this.setState({
+      cpassword: e.target.value
+    });
+  }
+  handleName(e) {
+    this.setState({
+      name: e.target.value
+    });
+  }
+
   handleEmail(e) {
     this.setState({
       email: e.target.value
     });
   }
   handleSubmit(e) {
-    const user = "pepe@mail.com";
-    const pass = "123";
     e.preventDefault();
+    if (this.state.password !== this.state.cpassword) {
+      alert("Verifique la contraseña");
+      return;
+    }
     if (
-      localStorage.getItem("email") === null ||
-      localStorage.getItem("password") === null
+      !this.state.email.length ||
+      !this.state.password.length ||
+      !this.state.name.length ||
+      !this.state.cpassword.length
     ) {
-      if (this.state.email !== user || this.state.password !== pass) {
-        alert("Correo o password incorrecto");
-        return;
-      }
-    } else if (
-      localStorage.getItem("email") !== this.state.email ||
-      localStorage.getItem("password") !== this.state.password
-    ) {
-      alert("Correo o password incorrecto");
+      alert("Llene todos los campos");
       return;
     }
     localStorage.setItem("email", this.state.email);
     localStorage.setItem("password", this.state.password);
-    this.props.login();
+    localStorage.setItem("name", this.state.name);
+    //this.props.login();
     document.location.href = "/home";
   }
   render() {
     return (
       <React.Fragment>
         <CssBaseline />
+        <Drawer />
         <main className="layout">
           <Paper className="paper">
             <Avatar className="avatar">
-              <LockIcon />
+              <AccountCircleIcon />
             </Avatar>
-            <Typography variant="h2">Sign in</Typography>
+            <Typography variant="h2">Update</Typography>
             <form className="form" onSubmit={this.handleSubmit}>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="email">Nombre</InputLabel>
+                <Input
+                  id="nombre"
+                  name="nombre"
+                  autoComplete="nombre"
+                  onChange={this.handleName}
+                  autoFocus
+                />
+              </FormControl>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>
                 <Input
@@ -82,6 +104,16 @@ export class Login extends React.Component {
                   id="password"
                   autoComplete="current-password"
                   onChange={this.handlePassword}
+                />
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="password">Confirmar Password</InputLabel>
+                <Input
+                  name="Confirmarpassword"
+                  type="password"
+                  id="onfirmarpassword"
+                  autoComplete="current-password"
+                  onChange={this.handleCpassword}
                 />
               </FormControl>
               <Button

@@ -11,8 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { TodoList } from "./TodoList";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
+import ListAltTwoToneIcon from "@material-ui/icons/ListAltTwoTone";
 
 const drawerWidth = 240;
 
@@ -136,15 +137,23 @@ export default function PersistentDrawerLeft() {
         <AccountCircleIcon className={classes.user} />
         <h3> {localStorage.getItem("email")}</h3>
         <Divider />
+
+        <IconButton color="inherit" href="/user-profile">
+          Update profile
+          <EditTwoToneIcon />
+        </IconButton>
+        <Divider />
+        <IconButton color="inherit" href="/home">
+          List Todo
+          <ListAltTwoToneIcon />
+        </IconButton>
+        <Divider />
       </Drawer>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open
         })}
-      >
-        
-        
-      </main>
+      ></main>
     </div>
   );
 }

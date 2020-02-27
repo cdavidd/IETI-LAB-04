@@ -13,9 +13,12 @@ export class Todo extends React.Component {
     return (
       <Card className="root">
         <CardContent>
-          <Typography>{this.props.text}</Typography>
-          <Typography>{this.props.priority}</Typography>
-          <Typography>{this.props.dueDate.toDateString()}</Typography>
+          <Typography>{this.props.descripcion}</Typography>
+          <Typography>{this.props.name}</Typography>
+          <Typography>{this.props.status}</Typography>
+          <Typography>
+            {new Date(this.props.dueDate).toLocaleDateString()}
+          </Typography>
         </CardContent>
       </Card>
     );
